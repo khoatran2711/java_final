@@ -7,7 +7,6 @@
 *.cache
 
 # Ignore build results
-[Bb]uild/
 [Dd]ebug/
 [Rr]elease/
 x64/
