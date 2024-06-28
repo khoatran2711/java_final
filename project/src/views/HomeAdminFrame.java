@@ -55,7 +55,7 @@ public class HomeAdminFrame extends javax.swing.JFrame {
         qlHoaDon = new QuanLyHoaDon();
         LoadTableMonAn();
         LoadTableNV();
-        LoadDoanhSo();
+        LoadDoanhSo(false);
         LoadDanhThu();
     }
     
@@ -171,11 +171,7 @@ public class HomeAdminFrame extends javax.swing.JFrame {
         tableDS = new javax.swing.JTable();
         btnXemDT = new javax.swing.JButton();
         dtEnd = new com.toedter.calendar.JDateChooser();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
-        jDateChooser4 = new com.toedter.calendar.JDateChooser();
-        jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -715,15 +711,6 @@ public class HomeAdminFrame extends javax.swing.JFrame {
 
         dtEnd.setDateFormatString("yyyy-MM-dd");
 
-        jButton2.setText("Xem");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel15.setText("Từ ngày");
         jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -734,18 +721,11 @@ public class HomeAdminFrame extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jDateChooser4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jDateChooser3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(24, 24, 24))
+                    .addComponent(jScrollPane4)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -766,8 +746,8 @@ public class HomeAdminFrame extends javax.swing.JFrame {
                                 .addComponent(dtEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnXemDT)))
-                        .addContainerGap(102, Short.MAX_VALUE))))
-            .addComponent(jSeparator1)
+                        .addGap(0, 132, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -782,14 +762,6 @@ public class HomeAdminFrame extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(btnXemDT)
-                        .addGap(66, 66, 66)
-                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -800,7 +772,7 @@ public class HomeAdminFrame extends javax.swing.JFrame {
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
@@ -1044,16 +1016,17 @@ public class HomeAdminFrame extends javax.swing.JFrame {
     }
     private void btnXemDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemDTActionPerformed
         // TODO add your handling code here:
+        if(dtStart.getDate() == null || dtStart.getDate() == null){
+            LoadDoanhSo(false);
+            return;
+        }
         long value = qlHoaDon.GetDoanhThu(dtStart.getDate(), dtEnd.getDate());      
         txtTuyChinh.setText(GetStringDoanhThu(value));
         
         int valueCount = qlHoaDon.GetCountHoaDon(dtStart.getDate(), dtEnd.getDate());      
-        txtDonTuyChinh.setText(GetStringDoanhThu(valueCount));
+        txtDonTuyChinh.setText(GetStringCount(valueCount));
+        LoadDoanhSo(true);
     }//GEN-LAST:event_btnXemDTActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -1219,10 +1192,15 @@ public class HomeAdminFrame extends javax.swing.JFrame {
 
     }
 
-    private void LoadDoanhSo() {
-        ArrayList<Bill> billArr = qlHoaDon.GetAllHoaDon();
+    private void LoadDoanhSo(boolean hasDate) {
+        ArrayList<Bill> billArr;
+        if (hasDate) {
+            billArr = qlHoaDon.GetHoaDon(dtStart.getDate(), dtEnd.getDate());
+        } else {
+            billArr = qlHoaDon.GetAllHoaDon();
+        }
         TieuDeDS();
-
+        vNDungDS = new Vector();
         for (Bill bill : billArr) {
             NhapDS(bill);
         }
@@ -1278,12 +1256,8 @@ public class HomeAdminFrame extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dtEnd;
     private com.toedter.calendar.JDateChooser dtStart;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
-    private com.toedter.calendar.JDateChooser jDateChooser4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;

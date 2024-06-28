@@ -208,4 +208,35 @@ public class QuanLyHoaDon {
         
         return 0;
     }
+    public ArrayList<Bill> GetHoaDon(Date start, Date end){
+        ArrayList<Bill> list = new ArrayList<Bill>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        String query = String.format("SELECT hoadon.ID, hoadon.soBan, hoadon.checkIn, hoadon.checkOut, sum(orderitem.soLuong * vatpham.donGia) AS TongTien, thongtinnguoidung.hoVaTen FROM orderitem " +
+"INNER JOIN hoadon ON orderitem.IDHoaDon = hoadon.ID " +
+"INNER JOIN vatpham ON orderitem.IDVatPham = vatpham.ID " +
+"INNER JOIN thongtinnguoidung ON thongtinnguoidung.ID = hoadon.idNhanVien " +
+"WHERE checkIn >= '%s' AND checkOut <= '%s' GROUP BY orderitem.IDHoaDon desc", 
+            ""+dateFormat.format(start), 
+            ""+dateFormat.format(end));
+        
+        ResultSet rs = Database.queryHandle(query, "get");
+        try {
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                int soBan = rs.getInt("soBan");
+                Timestamp ci = rs.getTimestamp("checkIn");
+                Timestamp co = rs.getTimestamp("checkOut");
+                int tongTien = rs.getInt("tongTien");
+                String tenNV = rs.getString("hoVaTen");
+
+                Bill bill = new Bill(id, soBan, ci, co, tongTien, tenNV);
+                list.add(bill);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuanLyHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return list;
+    }
 }
