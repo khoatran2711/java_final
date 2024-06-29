@@ -178,6 +178,7 @@ public class HomeAdminFrame extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         btnSwitchDS = new javax.swing.JButton();
@@ -730,6 +731,13 @@ public class HomeAdminFrame extends javax.swing.JFrame {
         jLabel16.setText("Đến ngày");
         jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jButton5.setText("Xuất file");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -765,7 +773,9 @@ public class HomeAdminFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(dtEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnXemDT)))
+                                .addComponent(btnXemDT)
+                                .addGap(150, 150, 150)
+                                .addComponent(jButton5)))
                         .addContainerGap(102, Short.MAX_VALUE))))
             .addComponent(jSeparator1)
         );
@@ -781,17 +791,6 @@ public class HomeAdminFrame extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(btnXemDT)
-                        .addGap(66, 66, 66)
-                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(dtEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -801,7 +800,20 @@ public class HomeAdminFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnXemDT)
+                            .addComponent(jButton5))
+                        .addGap(66, 66, 66)
+                        .addComponent(jDateChooser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         tabPanel.addTab("Doanh Thu", jPanel6);
@@ -1063,6 +1075,48 @@ public class HomeAdminFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+            
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Orders");
+
+            Row headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("ID");
+            headerRow.createCell(1).setCellValue("Số bàn");
+            headerRow.createCell(2).setCellValue("Check in");
+            headerRow.createCell(3).setCellValue("Check out");
+            headerRow.createCell(4).setCellValue("Tổng tiền");
+            headerRow.createCell(5).setCellValue("Nhân viên");
+
+            ArrayList<Bill> billArr = qlHoaDon.GetAllHoaDon();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+            int i = 1;
+            for (Bill bill : billArr) {
+                Row dataRow = sheet.createRow(i);
+                dataRow.createCell(0).setCellValue(bill.getId());
+                dataRow.createCell(1).setCellValue(bill.getSoBan());
+                dataRow.createCell(2).setCellValue(timestampToDate(bill.getCheckOut()));
+                dataRow.createCell(3).setCellValue(timestampToDate(bill.getCheckOut()));
+                dataRow.createCell(4).setCellValue(bill.getTongTien());
+                dataRow.createCell(5).setCellValue(bill.getHotenNV());
+                System.out.println(bill.getCheckIn());
+
+                i++;
+            }
+
+            try (FileOutputStream fileOut = new FileOutputStream("orders.xlsx")) {
+                workbook.write(fileOut);
+            }
+
+            JOptionPane.showMessageDialog(null, "Data exported to orders.xlsx", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error exporting data", "Error", JOptionPane.ERROR_MESSAGE);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1281,6 +1335,7 @@ public class HomeAdminFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
