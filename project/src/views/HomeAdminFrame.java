@@ -1334,7 +1334,9 @@ public class HomeAdminFrame extends javax.swing.JFrame {
         LoadNV(qlNhanVien.GetAllData());
     }
 
+    private ArrayList<VatPham> tableVP;
     private void LoadMenu(ArrayList<VatPham> vatPhamArr) {
+        this.tableVP = vatPhamArr;
         TieuDeMenu();
         vNDungMenu = new Vector();
         for (VatPham vp : vatPhamArr) {
@@ -1350,7 +1352,7 @@ public class HomeAdminFrame extends javax.swing.JFrame {
                 if (e.getClickCount() == 2) {
                     int selectedRow = tableMenu.getSelectedRow();
                     // Xử lý sự kiện double click ở đây, ví dụ:
-                    selectedVP = vatPhamArr.get(selectedRow);
+                    selectedVP = tableVP.get(selectedRow);
                     txtNameItem.setText(selectedVP.getTenVatPham());
                     txtPrice.setText(selectedVP.getGiaThanh() + "");
                     btnAddItem.setEnabled(false);
