@@ -1121,7 +1121,7 @@ public class HomeAdminFrame extends javax.swing.JFrame {
         }
         
         voucher v = qlVoucher.getVoucherByMaVoucher(nameVoucher.getText());
-        if(v != null && nameVoucher.getText().equals(v.getMaVoucer()+"")){
+        if(v != null && nameVoucher.getText().equals(v.getMaVoucer()+"") && v.getID() != selectedVoucher.getID()){
             System.out.println("Sua voucher that bai, ten da so huu!");
             return;
         }
@@ -1190,9 +1190,17 @@ public class HomeAdminFrame extends javax.swing.JFrame {
             return;
         }
         
+        voucher v = qlVoucher.getVoucherByMaVoucher(nameVoucher.getText());
+        if(v != null && nameVoucher.getText().equals(v.getMaVoucer()+"")){
+            System.out.println("Sua voucher that bai, ten da so huu!");
+            return;
+        }
+        
         Date local = new Date();
         Date hsd = dateHSDVoucher.getDate();
-        qlVoucher.addVoucher(maVoucher, gt, sl, local, hsd, true);
+        if(qlVoucher != null){
+            qlVoucher.addVoucher(maVoucher, gt, sl, local, hsd);
+        }
         LoadAllVoucher();
     }//GEN-LAST:event_btnAddVoucherActionPerformed
 

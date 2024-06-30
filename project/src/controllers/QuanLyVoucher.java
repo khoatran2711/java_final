@@ -53,7 +53,7 @@ public class QuanLyVoucher {
         return DSVoucer;
     }
 
-    public void addVoucher(String maVoucer, int giaTri, int soLuong, Date ngayBatDau, Date ngayKetThuc, boolean available) {
+    public void addVoucher(String maVoucer, int giaTri, int soLuong, Date ngayBatDau, Date ngayKetThuc) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         
         
