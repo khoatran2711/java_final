@@ -46,7 +46,7 @@ public class QuanLyVP {
     }
 
     public void Insert(String name, int price) {
-        String query = "INSERT INTO vatpham (tenVatPham, donGia,available) VALUES('" + name + "', " + price + "'1'" +");";
+        String query = "INSERT INTO vatpham (tenVatPham, donGia) VALUES('" + name + "', " + price  +");";
         Database.queryHandle(query, "insert");
     }
 

@@ -77,13 +77,16 @@ public class QuanLyNhanVien {
     }
 
     public int themThongTinNguoiDung(Nguoi nguoi) {
-        String query = "INSERT INTO thongtinnguoidung( hoVaTen,ngaySinh, diaChi, taiKhoan, matKhau,IDquyen) VALUES ( " 
+        String query = "INSERT INTO thongtinnguoidung( hoVaTen,ngaySinh, diaChi, taiKhoan, matKhau,IDquyen,available) VALUES ( " 
                 + "\'" + nguoi.getHoVaTen() + "\'" 
                 + ',' + "\'" + "2003-12-12" + "\'" //nguoi.getNgaySinh()
                 + ',' + "\'" + nguoi.getDiaChi() + "\'" 
                 + ',' + "\'" + nguoi.getTaiKhoan() + "\'" 
                 + ',' + "\'" + nguoi.getMatKhau() + "\'" 
-                + ',' + nguoi.getIdQuyen() + " )";
+                + ',' + nguoi.getIdQuyen()
+                + ',' + "\'" + 1 + "\'" +
+                
+                " )";
         
         ResultSet rs = db.queryHandle(query, "insert");
         int id = 0;
@@ -159,11 +162,10 @@ public class QuanLyNhanVien {
             int luong = rs.getInt("luong");
             String taiKhoan = rs.getString("taiKhoan");
             String matKhau = rs.getString("matKhau");
-            boolean available = rs.getBoolean("available");
 
 
 
-            NhanVien nv = new NhanVien(luong, caLam, id, hoVaTen, ngaySinh, diaChi, taiKhoan, matKhau, idRole, available);
+            NhanVien nv = new NhanVien(luong, caLam, id, hoVaTen, ngaySinh, diaChi, taiKhoan, matKhau, idRole, true);
             return nv;
         }
         return null;

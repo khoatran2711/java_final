@@ -16,7 +16,7 @@ public class VatPham {
     private String tenVatPham;
     private int giaThanh;
     private Time thoiGianGoiMon;
-     private boolean availabel;
+    private boolean availabel;
 
 
     public VatPham() {
