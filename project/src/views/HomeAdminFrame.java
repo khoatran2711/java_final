@@ -55,16 +55,35 @@ public class HomeAdminFrame extends javax.swing.JFrame {
 
         qlVatPham = new QuanLyVP();
         qlHoaDon = new QuanLyHoaDon();
+        qlVoucher = new QuanLyVoucher();
+
         LoadTableMonAn();
         LoadTableNV();
         LoadDoanhSo(false);
         LoadDanhThu();
         LoadAllVoucher();
+        
+        
+        tableVoucher.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int selectedRow = tableVoucher.getSelectedRow();
+                    // Xử lý sự kiện double click ở đây, ví dụ:
+                    selectedVoucher = voucherArr.get(selectedRow);
+                    
+                    nameVoucher.setText(selectedVoucher.getMaVoucer());
+                    giatriVoucher.setValue(selectedVoucher.getGiaTri());
+                    slVoucher.setValue(selectedVoucher.getSoLuong());
+                    dateHSDVoucher.setDate(selectedVoucher.getNgayKetThuc());
+                    btnAddVoucher.setEnabled(false);
+                }
+            }
+        });
     }
     QuanLyVoucher qlVoucher;
     private void LoadAllVoucher(){
         TieuDeVoucher();
-        qlVoucher = new QuanLyVoucher();
         LoadVoucher(qlVoucher.getDSVoucher());
     }
     
@@ -1171,8 +1190,10 @@ public class HomeAdminFrame extends javax.swing.JFrame {
             return;
         }
         
-        qlVoucher.addVoucher(maVoucher, gt, sl, new Date(), dateHSDVoucher.getDate(), rootPaneCheckingEnabled);
-        LoadVoucher(qlVoucher.getDSVoucher());
+        Date local = new Date();
+        Date hsd = dateHSDVoucher.getDate();
+        qlVoucher.addVoucher(maVoucher, gt, sl, local, hsd, true);
+        LoadAllVoucher();
     }//GEN-LAST:event_btnAddVoucherActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1375,22 +1396,7 @@ public class HomeAdminFrame extends javax.swing.JFrame {
         dtmVoucher.setDataVector(vNDungVoucher, vTieuDeVoucher);
         tableVoucher.setModel(dtmVoucher);
         
-        tableVoucher.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int selectedRow = tableVoucher.getSelectedRow();
-                    // Xử lý sự kiện double click ở đây, ví dụ:
-                    selectedVoucher = voucherArr.get(selectedRow);
-                    
-                    nameVoucher.setText(selectedVoucher.getMaVoucer());
-                    giatriVoucher.setValue(selectedVoucher.getGiaTri());
-                    slVoucher.setValue(selectedVoucher.getSoLuong());
-                    dateHSDVoucher.setDate(selectedVoucher.getNgayKetThuc());
-                    btnAddVoucher.setEnabled(false);
-                }
-            }
-        });
+        
     }
     
     private voucher selectedVoucher;
