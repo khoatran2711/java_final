@@ -998,14 +998,7 @@ public class HomeAdminFrame extends javax.swing.JFrame {
         int price = Integer.parseInt(txtPrice.getText());
 
         qlVatPham.Insert(name, price);
-        VatPham vp = qlVatPham.GetVatPhamByName(name);
-        if (vp.getID() == -1) {
-            return;
-        }
-
-        NhapMenu(vp);
-        dtm.setDataVector(vNDungMenu, vTieuDeMenu);
-        tableMenu.setModel(dtm);
+        LoadTableMonAn();
     }//GEN-LAST:event_btnAddItemActionPerformed
 
     private void btnDeleteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteItemActionPerformed
