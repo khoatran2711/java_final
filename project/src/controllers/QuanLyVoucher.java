@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import models.voucher;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,14 +53,18 @@ public class QuanLyVoucher {
         return DSVoucer;
     }
 
-    public void addVoucher(String maVoucer, int giaTri, int soLuong, Timestamp ngayBatDau, Timestamp ngayKetThuc, boolean available) {
-        String queryString = "INSERT INTO voucher(maVoucer,giaTri,soLuong,ngayBatDau,ngayKetThuc,available) VALUES ('" + maVoucer + "','" + giaTri + "','" + soLuong + "',' " + ngayBatDau + "',' " + ngayKetThuc + "', " + "'1'" + ")";
+    public void addVoucher(String maVoucer, int giaTri, int soLuong, Date ngayBatDau, Date ngayKetThuc, boolean available) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        
+        String queryString = "INSERT INTO voucher(maVoucer,giaTri,soLuong,ngayBatDau,ngayKetThuc,available) VALUES ('" + maVoucer + "','" + giaTri + "','" + soLuong + "',' " + dateFormat.format(ngayBatDau) + "',' " + dateFormat.format(ngayKetThuc) + "', " + "'1'" + ")";
+        System.out.println(queryString);
         Database.queryHandle(queryString, "insert");
     }
 
     public voucher getVoucherByMaVoucher(String maVoucer) {
         voucher vc = new voucher();
-        String queryString = "SELECT * FROM voucher WHERE maVoucer =" + maVoucer + " and available = '1'";
+        String queryString = "SELECT * FROM voucher WHERE maVoucer = \"" + maVoucer + "\" and available = '1'";
         ResultSet rs = Database.queryHandle(queryString, "get");
         try {
             if (rs.next()) {
@@ -103,8 +108,11 @@ public class QuanLyVoucher {
 
     }
 
-    public void updateVoucher(int ID, String maVoucer, int giaTri, int soLuong, Timestamp ngayBatDau, Timestamp ngayKetThuc, boolean available) {
-        String query = "UPDATE voucher SET maVoucer = \"" + maVoucer + "\", giaTri = " + giaTri + "\", soLuong = " + soLuong + "\", ngayBatDau = " + ngayBatDau + "\", ngayKetThuc = " + ngayKetThuc + " WHERE ID = " + ID + ";";
+    public void updateVoucher(int ID, String maVoucer, int giaTri, int soLuong, Date ngayKetThuc) {
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String query = "UPDATE voucher SET maVoucer = \"" + maVoucer + "\", giaTri = " + giaTri + ", soLuong = " + soLuong + ", ngayKetThuc = \"" + dateFormat.format(ngayKetThuc) + "\" WHERE ID = " + ID + ";";
+        System.out.println(query);
         Database.queryHandle(query, "update");
     }
 
