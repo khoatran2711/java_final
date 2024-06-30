@@ -41,6 +41,7 @@ public class Nguoi {
         this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
         this.idQuyen = idQuyen;
+        this.available = true;
     }
   
 
