@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 26, 2024 at 02:26 PM
+-- Generation Time: Jun 30, 2024 at 05:04 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -167,8 +167,7 @@ CREATE TABLE `thongtinnguoidung` (
 
 INSERT INTO `thongtinnguoidung` (`ID`, `hoVaTen`, `ngaySinh`, `diaChi`, `taiKhoan`, `matKhau`, `IDQuyen`, `available`) VALUES
 (1, 'admin', '2024-06-10', 'HaNoi', 'admin', 'admin', 1, 1),
-(2, 'Van A', '2003-12-12', 'soc son', 'danThuong', 'danThuong', 2, 1),
-(3, 'Van AB', '2003-12-12', 'soc son', '1', '1', 2, 1),
+(2, 'Van A', '2003-12-12', 'soc son', 'danThuong', 'danThuong', 2, 0),
 (4, 'Quân', '2003-12-12', 'Thanh Hoa', 'quan', '1', 2, 1),
 (6, 'jung', '2003-12-12', 'hanoi', 'jung', 'jung', 2, 0);
 
@@ -196,6 +195,30 @@ INSERT INTO `vatpham` (`ID`, `tenVatPham`, `donGia`, `available`) VALUES
 (5, 'Kem dừa', '270000', 1),
 (6, 'trà chanh', '20000', 0),
 (7, 'test', '20000', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `voucher`
+--
+
+CREATE TABLE `voucher` (
+  `ID` int(11) NOT NULL,
+  `maVoucer` text COLLATE utf8_unicode_ci NOT NULL,
+  `giaTri` int(11) NOT NULL,
+  `soLuong` int(11) NOT NULL,
+  `ngayBatDau` datetime NOT NULL,
+  `ngayKetThuc` datetime NOT NULL,
+  `available` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `voucher`
+--
+
+INSERT INTO `voucher` (`ID`, `maVoucer`, `giaTri`, `soLuong`, `ngayBatDau`, `ngayKetThuc`, `available`) VALUES
+(1, 'saleHeCucChay', 35, 20, '2024-06-24 00:00:00', '2024-06-29 00:00:00', 1),
+(2, 'SieuSaleVcloz', 35, 50, '2024-06-24 16:31:26', '2024-06-24 16:31:26', 1);
 
 --
 -- Indexes for dumped tables
@@ -242,6 +265,12 @@ ALTER TABLE `vatpham`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `voucher`
+--
+ALTER TABLE `voucher`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -274,6 +303,12 @@ ALTER TABLE `thongtinnguoidung`
 --
 ALTER TABLE `vatpham`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `voucher`
+--
+ALTER TABLE `voucher`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
