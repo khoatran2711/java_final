@@ -447,7 +447,7 @@
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
-                                          <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jPanel12" min="-2" pref="411" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace pref="119" max="32767" attributes="0"/>
@@ -465,7 +465,7 @@
                                       <Component id="jButton3" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                                       <Component id="jButton4" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                                  <EmptySpace pref="43" max="32767" attributes="0"/>
                                   <Component id="jScrollPane3" min="-2" pref="305" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -568,13 +568,15 @@
                                           </Group>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="slVoucher" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="slVoucher" alignment="0" max="32767" attributes="0"/>
                                           <Component id="nameVoucher" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="dateHSDVoucher" alignment="0" pref="228" max="32767" attributes="0"/>
                                           <Component id="giatriVoucher" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="dateHSDVoucher" pref="241" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -590,6 +592,7 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="giatriVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel9" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -644,8 +647,13 @@
                             <Component class="javax.swing.JSpinner" name="giatriVoucher">
                               <Properties>
                                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                                  <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="10000" type="number"/>
+                                  <SpinnerModel initial="5" maximum="100" minimum="5" numberType="java.lang.Integer" stepSize="5" type="number"/>
                                 </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jLabel9">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="%"/>
                               </Properties>
                             </Component>
                           </SubComponents>
