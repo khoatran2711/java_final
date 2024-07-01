@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 30, 2024 at 05:04 AM
+-- Generation Time: Jul 01, 2024 at 06:28 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -42,7 +42,7 @@ INSERT INTO `ban` (`soBan`, `trangThai`, `avalable`) VALUES
 (1, 0, 1),
 (2, 1, 1),
 (3, 1, 1),
-(4, 0, 1);
+(4, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -56,28 +56,29 @@ CREATE TABLE `hoadon` (
   `checkIn` datetime DEFAULT NULL,
   `checkOut` datetime DEFAULT NULL,
   `idNhanVien` int(11) DEFAULT NULL,
-  `isPayed` tinyint(1) DEFAULT '0'
+  `isPayed` tinyint(1) DEFAULT '0',
+  `tongTien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Dumping data for table `hoadon`
 --
 
-INSERT INTO `hoadon` (`ID`, `soBan`, `checkIn`, `checkOut`, `idNhanVien`, `isPayed`) VALUES
-(1, 2, '2018-12-12 23:50:55', '2024-06-19 17:24:13', 2, 1),
-(2, 1, '2023-12-15 22:03:00', '2023-12-15 22:03:54', 2, 1),
-(3, 3, '2023-12-15 22:04:04', '2024-06-19 17:24:16', 2, 1),
-(4, 4, '2023-12-15 22:04:20', '2024-06-19 17:24:18', 2, 1),
-(5, 1, '2024-06-19 17:22:15', '2024-06-19 17:24:09', 2, 1),
-(6, 1, '2024-06-19 20:52:19', '2024-06-19 20:52:25', 2, 1),
-(7, 1, '2024-06-19 20:52:45', '2024-06-19 20:52:46', 2, 1),
-(8, 1, '2024-06-19 20:52:53', NULL, NULL, 0),
-(9, 2, '2024-06-22 13:30:30', '2024-06-22 13:30:35', 2, 1),
-(10, 2, '2024-06-22 13:37:09', '2024-06-22 13:37:11', 2, 1),
-(11, 2, '2024-06-22 13:37:23', '2024-06-22 13:37:34', 2, 1),
-(12, 4, '2024-06-22 13:40:43', '2024-06-22 13:40:45', 4, 1),
-(13, 2, '2024-06-22 14:16:15', '2024-06-22 14:16:24', 2, 1),
-(14, 4, '2024-06-22 14:16:41', NULL, NULL, 0);
+INSERT INTO `hoadon` (`ID`, `soBan`, `checkIn`, `checkOut`, `idNhanVien`, `isPayed`, `tongTien`) VALUES
+(1, 2, '2018-12-12 23:50:55', '2024-06-19 17:24:13', 2, 1, 0),
+(2, 1, '2023-12-15 22:03:00', '2023-12-15 22:03:54', 2, 1, 0),
+(3, 3, '2023-12-15 22:04:04', '2024-06-19 17:24:16', 2, 1, 0),
+(4, 4, '2023-12-15 22:04:20', '2024-06-19 17:24:18', 2, 1, 0),
+(5, 1, '2024-06-19 17:22:15', '2024-06-19 17:24:09', 2, 1, 0),
+(6, 1, '2024-06-19 20:52:19', '2024-06-19 20:52:25', 2, 1, 0),
+(7, 1, '2024-06-19 20:52:45', '2024-06-19 20:52:46', 2, 1, 0),
+(8, 1, '2024-06-19 20:52:53', NULL, NULL, 0, 0),
+(9, 2, '2024-06-22 13:30:30', '2024-06-22 13:30:35', 2, 1, 0),
+(10, 2, '2024-06-22 13:37:09', '2024-06-22 13:37:11', 2, 1, 0),
+(11, 2, '2024-06-22 13:37:23', '2024-06-22 13:37:34', 2, 1, 0),
+(12, 4, '2024-06-22 13:40:43', '2024-06-22 13:40:45', 4, 1, 0),
+(13, 2, '2024-06-22 14:16:15', '2024-06-22 14:16:24', 2, 1, 0),
+(14, 4, '2024-06-22 14:16:41', '2024-07-01 13:22:10', 2, 1, 10000);
 
 -- --------------------------------------------------------
 
@@ -169,7 +170,8 @@ INSERT INTO `thongtinnguoidung` (`ID`, `hoVaTen`, `ngaySinh`, `diaChi`, `taiKhoa
 (1, 'admin', '2024-06-10', 'HaNoi', 'admin', 'admin', 1, 1),
 (2, 'Van A', '2003-12-12', 'soc son', 'danThuong', 'danThuong', 2, 0),
 (4, 'Quân', '2003-12-12', 'Thanh Hoa', 'quan', '1', 2, 1),
-(6, 'jung', '2003-12-12', 'hanoi', 'jung', 'jung', 2, 0);
+(6, 'jung', '2003-12-12', 'hanoi', 'jung', 'jung', 2, 0),
+(7, 'test', '2003-12-12', 'test', 'test', 'test', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -181,7 +183,7 @@ CREATE TABLE `vatpham` (
   `ID` int(11) NOT NULL,
   `tenVatPham` varchar(256) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `donGia` varchar(256) COLLATE utf8_vietnamese_ci DEFAULT NULL,
-  `available` tinyint(1) NOT NULL
+  `available` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -194,7 +196,13 @@ INSERT INTO `vatpham` (`ID`, `tenVatPham`, `donGia`, `available`) VALUES
 (3, 'ca pô chi nô', '40000', 1),
 (5, 'Kem dừa', '270000', 1),
 (6, 'trà chanh', '20000', 0),
-(7, 'test', '20000', 0);
+(7, 'test', '20000', 0),
+(8, 'cà phê dừa', '50000', 1),
+(9, 'Nước dứa', '20000', 1),
+(10, 'Nước dừa xiêm', '20000', 1),
+(11, 'Nước táo', '100000', 1),
+(12, 'nước dừa xiêm', '20000', 1),
+(13, 'test', '12000', 1);
 
 -- --------------------------------------------------------
 
@@ -218,7 +226,8 @@ CREATE TABLE `voucher` (
 
 INSERT INTO `voucher` (`ID`, `maVoucer`, `giaTri`, `soLuong`, `ngayBatDau`, `ngayKetThuc`, `available`) VALUES
 (1, 'saleHeCucChay', 35, 20, '2024-06-24 00:00:00', '2024-06-29 00:00:00', 1),
-(2, 'SieuSaleVcloz', 35, 50, '2024-06-24 16:31:26', '2024-06-24 16:31:26', 1);
+(3, 'salehe71', 100, 45, '2024-07-01 00:00:00', '2024-06-21 00:00:00', 1),
+(4, 'khaitruong17', 50, 4, '2024-07-01 00:00:00', '2024-11-29 00:00:00', 1);
 
 --
 -- Indexes for dumped tables
@@ -296,19 +305,19 @@ ALTER TABLE `quyen`
 -- AUTO_INCREMENT for table `thongtinnguoidung`
 --
 ALTER TABLE `thongtinnguoidung`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `vatpham`
 --
 ALTER TABLE `vatpham`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `voucher`
 --
 ALTER TABLE `voucher`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
