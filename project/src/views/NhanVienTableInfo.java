@@ -7,6 +7,7 @@ package views;
 import controllers.QuanLyBan;
 import controllers.QuanLyHoaDon;
 import controllers.QuanLyVP;
+import controllers.QuanLyVoucher;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,7 @@ import javax.swing.table.TableRowSorter;
 import models.Ban;
 import models.VatPham;
 import models.orderItem;
+import models.voucher;
 
 /**
  *
@@ -30,6 +32,7 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
     /**
      * Creates new form NhanVienTableInfo
      */
+    private QuanLyVoucher qlVoucher;
     public NhanVienTableInfo() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -244,6 +247,8 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
         txtNumTable = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        voucherInput = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableMenu = new javax.swing.JTable();
@@ -298,7 +303,7 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Đang Order", jPanel2);
@@ -383,6 +388,19 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
             }
         });
 
+        voucherInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voucherInputActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Áp dụng");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -395,7 +413,13 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSumPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(voucherInput, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)
+                        .addGap(6, 6, 6)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -404,7 +428,11 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 16, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(voucherInput))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSumPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -455,7 +483,7 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -484,7 +512,8 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
 
     private void btnSumPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumPriceActionPerformed
         // TODO add your handling code here:
-        qlHoaDon.PayTable();
+        int tongTien = Integer.parseInt(btnSumPrice.getText()) ;
+        qlHoaDon.PayTable(tongTien);
         NhanVienTable nvTable = new NhanVienTable();
         nvTable.setVisible(true);
         dispose();
@@ -528,6 +557,31 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
         LoadTable(qlHoaDon.GetHoaDonWithIndex(table.getSoBan()));
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void voucherInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voucherInputActionPerformed
+    
+    }//GEN-LAST:event_voucherInputActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String maVoucher = voucherInput.getText();
+        this.qlVoucher = new QuanLyVoucher();
+        boolean isaccess = this.qlVoucher.checkAccessVoucher(maVoucher);
+        System.out.println(isaccess);
+        if(isaccess){
+            System.out.println(table.getSoBan());
+            ArrayList<orderItem> orderItemArr =  qlHoaDon.GetHoaDonWithIndex(table.getSoBan());
+            int sum = 0;
+            for (orderItem order : orderItemArr) {
+            Nhap(order);
+            sum += order.getSoLuong() * order.getvatpham().getGiaThanh();
+             }
+            voucher vc = this.qlVoucher.getVoucherByMaVoucher(maVoucher);
+            
+            btnSumPrice.setText((sum - (sum * vc.getGiaTri()/100)) + "");
+
+        }
+        voucherInput.setText("");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -568,6 +622,7 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -583,5 +638,6 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
     private javax.swing.JTable tableOrdered;
     private javax.swing.JTable tableOrdering;
     private javax.swing.JLabel txtNumTable;
+    private javax.swing.JTextField voucherInput;
     // End of variables declaration//GEN-END:variables
 }

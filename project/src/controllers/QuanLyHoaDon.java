@@ -100,7 +100,7 @@ public class QuanLyHoaDon {
 
     }
 
-    public void PayTable() {
+    public void PayTable(int tongTien) {
         if (indexTable < 0) {
             return;
         }
@@ -109,6 +109,7 @@ public class QuanLyHoaDon {
         String query
                 = "UPDATE hoadon SET checkOut = \"" + datetimeValue
                 + "\", idNhanVien = " + QuanLyTaiKhoan.Ins.getId()
+                +", tongTien = "+ tongTien
                 + ", isPayed = 1 WHERE hoadon.ID = " + idhoaDon;
         Database.queryHandle(query, "update");
 
@@ -142,7 +143,7 @@ public class QuanLyHoaDon {
 
     public ArrayList<Bill> GetAllHoaDon() {
         ArrayList<Bill> list = new ArrayList<Bill>();
-        String query = "SELECT hoadon.ID, hoadon.soBan, hoadon.checkIn, hoadon.checkOut, sum(orderitem.soLuong * vatpham.donGia) AS \"TongTien\", thongtinnguoidung.hoVaTen FROM orderitem \n"
+        String query = "SELECT hoadon.ID, hoadon.soBan, hoadon.checkIn, hoadon.checkOut, tongTien, thongtinnguoidung.hoVaTen FROM orderitem \n"
                 + "INNER JOIN hoadon ON orderitem.IDHoaDon = hoadon.ID\n"
                 + "INNER JOIN vatpham ON orderitem.IDVatPham = vatpham.ID\n"
                 + "INNER JOIN thongtinnguoidung ON thongtinnguoidung.ID = hoadon.idNhanVien\n"

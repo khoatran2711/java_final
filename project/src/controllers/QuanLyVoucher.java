@@ -122,15 +122,19 @@ public class QuanLyVoucher {
     }
 
     public boolean checkAccessVoucher(String maVoucer) {
+//        saleHeCucChay
         Date date = new Date();
+
         Timestamp dateNow = new Timestamp(date.getTime());
-        voucher vc = new voucher();
-        String queryString = "SELECT * FROM voucher WHERE maVoucer =" + maVoucer + " and available = '1' and ngayBatDau < " + dateNow + " and ngayKetThuc > " + dateNow + ";";
+        System.err.println(dateNow);
+
+        String queryString = "SELECT * FROM voucher WHERE maVoucer =\"" + maVoucer + "\" and available = \"1\" and ngayBatDau < \"" + dateNow + "\" and ngayKetThuc > \"" + dateNow + "\";";
+        System.out.println(queryString);
         ResultSet rs = Database.queryHandle(queryString, "get");
+        System.err.println(rs);
         try {
             if (rs.next()) {
                 return true;
-
             }
         } catch (Exception e) {
         }
