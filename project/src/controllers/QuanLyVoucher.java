@@ -115,12 +115,17 @@ public class QuanLyVoucher {
         System.out.println(query);
         Database.queryHandle(query, "update");
     }
-
+    
     public void DeleteVoucher(int id) {
         String query = "UPDATE voucher SET available = '0' WHERE ID = " + id;
         Database.queryHandle(query, "update");
     }
+    public void usedVoucher(String maVoucher){
+     String query = "UPDATE voucher SET  soLuong = soLuong - 1 "  + " WHERE maVoucer = \"" + maVoucher + "\";";
+     System.out.println(query);
+     Database.queryHandle(query, "update");
 
+    }
     public boolean checkAccessVoucher(String maVoucer) {
 //        saleHeCucChay
         Date date = new Date();
@@ -134,6 +139,7 @@ public class QuanLyVoucher {
         System.err.println(rs);
         try {
             if (rs.next()) {
+                usedVoucher(maVoucer);
                 return true;
             }
         } catch (Exception e) {

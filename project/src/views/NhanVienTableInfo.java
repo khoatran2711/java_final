@@ -571,13 +571,12 @@ public class NhanVienTableInfo extends javax.swing.JFrame {
             ArrayList<orderItem> orderItemArr =  qlHoaDon.GetHoaDonWithIndex(table.getSoBan());
             int sum = 0;
             for (orderItem order : orderItemArr) {
-            Nhap(order);
             sum += order.getSoLuong() * order.getvatpham().getGiaThanh();
              }
             voucher vc = this.qlVoucher.getVoucherByMaVoucher(maVoucher);
             
             btnSumPrice.setText((sum - (sum * vc.getGiaTri()/100)) + "");
-
+            
         }
         voucherInput.setText("");
     }//GEN-LAST:event_jButton4ActionPerformed

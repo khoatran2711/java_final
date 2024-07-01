@@ -124,10 +124,10 @@ public class QuanLyHoaDon {
 //        java.util.Date currentTime = calendar.getTime();
 //        java.sql.Time sqlTime = new java.sql.Time(currentTime.getTime());
         Timestamp datetimeValue = new Timestamp(System.currentTimeMillis());
-        String query = "INSERT INTO hoadon (soBan, checkIn, checkOut, idNhanVien, isPayed)"
+        String query = "INSERT INTO hoadon (soBan, checkIn, checkOut, idNhanVien, isPayed,tongTien)"
                 + "VALUES (" + indexTable
                 + ", \"" + datetimeValue
-                + "\", NULL , NULL, FALSE)";
+                + "\", NULL , NULL, FALSE,0)";
         db.queryHandle(query, "insert");
 
         query = "select id FROM hoadon WHERE soBan = " + indexTable + " AND isPayed = false";
